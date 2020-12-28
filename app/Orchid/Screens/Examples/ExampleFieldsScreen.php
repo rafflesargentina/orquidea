@@ -24,7 +24,7 @@ class ExampleFieldsScreen extends Screen
      *
      * @var string
      */
-    public $name = 'Basic form controls';
+    public $name = 'Basic Form Controls';
 
     /**
      * Display header description.
@@ -41,7 +41,7 @@ class ExampleFieldsScreen extends Screen
     public function query(): array
     {
         return [
-            'name' => 'Hello! We collected all the fields in one place',
+            'name' => __('Hello! We collected all the fields in one place'),
         ];
     }
 
@@ -63,145 +63,156 @@ class ExampleFieldsScreen extends Screen
     public function layout(): array
     {
         return [
-            Layout::columns([
-                Layout::rows([
+            Layout::columns(
+                [
+                Layout::rows(
+                    [
 
                     Input::make('name')
-                        ->title('Full Name:')
-                        ->placeholder('Enter full name')
+                        ->title(__('Full Name: '))
+                        ->placeholder(__('Enter full name'))
                         ->required()
-                        ->help('Please enter your full name'),
+                        ->help(__('Please enter your full name')),
 
                     Input::make('email')
-                        ->title('Email address')
-                        ->placeholder('Email address')
-                        ->help("We'll never share your email with anyone else.")
-                        ->popover('Tooltip - hint that user opens himself.'),
+                        ->title(__('Email address'))
+                        ->placeholder(__('Email address'))
+                        ->help(__("We'll never share your email with anyone else."))
+                        ->popover(__('Tooltip - hint that user opens himself.')),
 
                     Password::make('password')
-                        ->title('Password')
-                        ->placeholder('Password'),
+                        ->title(__('Password'))
+                        ->placeholder(__('Password')),
 
                     Label::make('static')
-                        ->title('Static:')
+                        ->title(__('Static: '))
                         ->value('email@example.com'),
 
                     Select::make('select')
-                        ->title('Select')
+                        ->title(__('Select'))
                         ->options([1, 2]),
 
                     CheckBox::make('checkbox')
-                        ->title('Checkbox')
-                        ->placeholder('Remember me'),
+                        ->title(__('Checkbox'))
+                        ->placeholder(__('Remember me')),
 
                     Radio::make('radio')
-                        ->placeholder('Yes')
+                        ->placeholder(__('Yes'))
                         ->value(1)
-                        ->title('Radio'),
+                        ->title(__('Radio')),
 
                     Radio::make('radio')
-                        ->placeholder('No')
+                        ->placeholder(__('No'))
                         ->value(0),
 
                     TextArea::make('textarea')
-                        ->title('Example textarea')
+                        ->title(__('Example textarea'))
                         ->rows(6),
 
-                ])->title('Base Controls'),
-                Layout::rows([
+                    ]
+                )->title(__('Base Controls')),
+                Layout::rows(
+                    [
                     Input::make('disabled_input')
-                        ->title('Disabled Input')
-                        ->placeholder('Disabled Input')
-                        ->help('A disabled input element is unusable and un-clickable.')
+                        ->title(__('Disabled Input'))
+                        ->placeholder(__('Disabled Input'))
+                        ->help(__('A disabled input element is unusable and un-clickable.'))
                         ->disabled(),
 
                     Select::make('disabled_select')
-                        ->title('Disabled select')
+                        ->title(__('Disabled Select'))
                         ->options([1, 2])
                         ->value(0)
                         ->disabled(),
 
                     TextArea::make('disabled_textarea')
-                        ->title('Disabled textarea')
-                        ->placeholder('Disabled textarea')
+                        ->title(__('Disabled textarea'))
+                        ->placeholder(__('Disabled textarea'))
                         ->rows(6)
                         ->disabled(),
 
                     Input::make('readonly_input')
-                        ->title('Readonly Input')
-                        ->placeholder('Readonly Input')
+                        ->title(__('Readonly Input'))
+                        ->placeholder(__('Readonly Input'))
                         ->readonly(),
 
                     CheckBox::make('readonly_checkbox')
-                        ->title('Readonly Checkbox')
-                        ->placeholder('Remember me')
+                        ->title(__('Readonly checkbox'))
+                        ->placeholder(__('Remember me'))
                         ->disabled(),
 
                     Radio::make('radio')
-                        ->placeholder('Yes')
+                        ->placeholder(__('Yes'))
                         ->value(1)
-                        ->title('Radio')
+                        ->title(__('Radio'))
                         ->disabled(),
 
                     Radio::make('radio')
-                        ->placeholder('No')
+                        ->placeholder(__('No'))
                         ->value(0)
                         ->disabled(),
 
                     TextArea::make('readonly_textarea')
-                        ->title('Readonlyd textarea')
-                        ->placeholder('Readonlyd textarea')
+                        ->title(__('Readonly textarea'))
+                        ->placeholder(__('Readonly textarea'))
                         ->rows(6)
                         ->disabled(),
 
-                ])->title('Input States'),
-            ]),
+                    ]
+                )->title(__('Input States')),
+                ]
+            ),
 
-            Layout::rows([
-                Group::make([
-                    Button::make('Primary')->method('buttonClickProcessing')->type(Color::PRIMARY()),
-                    Button::make('Secondary')->method('buttonClickProcessing')->type(Color::SECONDARY()),
-                    Button::make('Success')->method('buttonClickProcessing')->type(Color::SUCCESS()),
-                    Button::make('Danger')->method('buttonClickProcessing')->type(Color::DANGER()),
-                    Button::make('Warning')->method('buttonClickProcessing')->type(Color::WARNING()),
-                    Button::make('Info')->method('buttonClickProcessing')->type(Color::INFO()),
-                    Button::make('Light')->method('buttonClickProcessing')->type(Color::LIGHT()),
-                    Button::make('Dark')->method('buttonClickProcessing')->type(Color::DARK()),
-                    Button::make('Default')->method('buttonClickProcessing')->type(Color::DEFAULT()),
-                    Button::make('Link')->method('buttonClickProcessing')->type(Color::LINK()),
-                ])->autoWidth(),
+            Layout::rows(
+                [
+                Group::make(
+                    [
+                    Button::make(__('Primary'))->method('buttonClickProcessing')->type(Color::PRIMARY()),
+                    Button::make(__('Secondary'))->method('buttonClickProcessing')->type(Color::SECONDARY()),
+                    Button::make(__('Success'))->method('buttonClickProcessing')->type(Color::SUCCESS()),
+                    Button::make(__('Danger'))->method('buttonClickProcessing')->type(Color::DANGER()),
+                    Button::make(__('Warning'))->method('buttonClickProcessing')->type(Color::WARNING()),
+                    Button::make(__('Info'))->method('buttonClickProcessing')->type(Color::INFO()),
+                    Button::make(__('Light'))->method('buttonClickProcessing')->type(Color::LIGHT()),
+                    Button::make(__('Dark'))->method('buttonClickProcessing')->type(Color::DARK()),
+                    Button::make(__('Default'))->method('buttonClickProcessing')->type(Color::DEFAULT()),
+                    Button::make(__('Link'))->method('buttonClickProcessing')->type(Color::LINK()),
+                    ]
+                )->autoWidth(),
 
-                Button::make('Block level button')
+                Button::make(__('Block level button'))
                     ->method('buttonClickProcessing')
                     ->type(Color::DEFAULT())
                     ->block(),
 
-                Button::make('Right button')
+                Button::make(__('Right button'))
                     ->method('buttonClickProcessing')
                     ->type(Color::DEFAULT())
                     ->right(),
 
-            ])->title('Buttons'),
+                ]
+            )->title(__('Buttons')),
 
-            Layout::rows([
+            Layout::rows(
+                [
                 Input::make('test')
-                    ->title('Text')
-                    ->value('Artisanal kale')
-                    ->help('Elements of type text create basic single-line text fields.')
+                    ->title(__('Text'))
+                    ->value(__('Artisanal kale'))
+                    ->help(__('Elements of type text create basic single-line text fields.'))
                     ->horizontal(),
 
                 Input::make('search')
                     ->type('search')
-                    ->title('Search')
-                    ->value('How do I shoot web')
-                    ->help('Elements of type search are text fields designed for the user to enter search queries into.')
+                    ->title(__('Buscar'))
+                    ->value(__('How do I shoot web?'))
+                    ->help(__('Elements of type search are text fields designed for the user to enter search queries into.'))
                     ->horizontal(),
 
                 Input::make('email')
                     ->type('email')
                     ->title('Email')
                     ->value('bootstrap@example.com')
-                    ->help('Elements of type email are used to let the user enter and edit an e-mail address')
+                    ->help(__('Elements of type email are used to let the user enter and edit an e-mail address.'))
                     ->horizontal(),
 
                 Input::make('url')
@@ -212,63 +223,64 @@ class ExampleFieldsScreen extends Screen
 
                 Input::make('tel')
                     ->type('tel')
-                    ->title('Telephone')
+                    ->title(__('Telephone'))
                     ->value('1-(555)-555-5555')
                     ->horizontal(),
 
                 Input::make('password')
                     ->type('password')
-                    ->title('Password')
-                    ->value('Password')
+                    ->title(__('Password'))
+                    ->value(__('Password'))
                     ->horizontal(),
 
                 Input::make('number')
                     ->type('number')
-                    ->title('Number')
+                    ->title(__('Number'))
                     ->value(42)
                     ->horizontal(),
 
                 Input::make('date_and_time')
                     ->type('datetime-local')
-                    ->title('Date and time')
+                    ->title(__('Date and time'))
                     ->value('2011-08-19T13:45:00')
                     ->horizontal(),
 
                 Input::make('date')
                     ->type('date')
-                    ->title('Date')
+                    ->title(__('Date'))
                     ->value('2011-08-19')
                     ->horizontal(),
 
                 Input::make('month')
                     ->type('month')
-                    ->title('Month')
+                    ->title(__('Month'))
                     ->value('2011-08')
                     ->horizontal(),
 
                 Input::make('week')
                     ->type('week')
-                    ->title('Week')
+                    ->title(__('Week'))
                     ->value('2011-W33')
                     ->horizontal(),
 
                 Input::make('Time')
                     ->type('time')
-                    ->title('Time')
+                    ->title(__('Time'))
                     ->value('13:45:00')
                     ->horizontal(),
 
                 Input::make('color')
                     ->type('color')
-                    ->title('Color')
+                    ->title(__('Color'))
                     ->value('#563d7c')
                     ->horizontal(),
 
-                Button::make('Submit')
+                Button::make(__('Submit'))
                     ->method('buttonClickProcessing')
                     ->type(Color::DEFAULT()),
 
-            ])->title('Textual HTML5 Inputs'),
+                ]
+            )->title(__('Textual HTML5 Inputs')),
         ];
     }
 
@@ -277,6 +289,6 @@ class ExampleFieldsScreen extends Screen
      */
     public function buttonClickProcessing()
     {
-        Alert::warning('Provide contextual feedback messages for typical user actions with the handful of available and flexible alert messages.');
+        Alert::warning(__('Provide contextual feedback messages for typical user actions with the handful of available and flexible alert messages.'));
     }
 }

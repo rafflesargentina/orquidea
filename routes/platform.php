@@ -27,6 +27,10 @@ use Tabuna\Breadcrumbs\Trail;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the need "dashboard" middleware group. Now create something great!
 |
+| Traducción
+| Aquí es donde puede registrar rutas web para su aplicación.
+| RouteServiceProvider carga estas rutas dentro de un grupo que contiene
+| el grupo middleware de "tablero" necesario. ¡Ahora crea algo genial!
 */
 
 // Main

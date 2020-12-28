@@ -42,9 +42,11 @@ class RolePermissionLayout extends Rows
     private function generatedPermissionFields(Collection $permissionsRaw): array
     {
         return $permissionsRaw
-            ->map(function (Collection $permissions, $title) {
-                return $this->makeCheckBoxGroup($permissions, $title);
-            })
+            ->map(
+                function (Collection $permissions, $title) {
+                    return $this->makeCheckBoxGroup($permissions, $title);
+                }
+            )
             ->flatten()
             ->toArray();
     }
@@ -58,21 +60,27 @@ class RolePermissionLayout extends Rows
     private function makeCheckBoxGroup(Collection $permissions, string $title): Collection
     {
         return $permissions
-            ->map(function (array $chunks) {
-                return $this->makeCheckBox(collect($chunks));
-            })
+            ->map(
+                function (array $chunks) {
+                    return $this->makeCheckBox(collect($chunks));
+                }
+            )
             ->flatten()
-            ->map(function (CheckBox $checkbox, $key) use ($title) {
-                return $key === 0
+            ->map(
+                function (CheckBox $checkbox, $key) use ($title) {
+                    return $key === 0
                     ? $checkbox->title($title)
                     : $checkbox;
-            })
+                }
+            )
             ->chunk(4)
-            ->map(function (Collection $checkboxes) {
-                return Group::make($checkboxes->toArray())
+            ->map(
+                function (Collection $checkboxes) {
+                    return Group::make($checkboxes->toArray())
                     ->alignEnd()
                     ->autoWidth();
-            });
+                }
+            );
     }
 
     /**
@@ -86,10 +94,12 @@ class RolePermissionLayout extends Rows
             ->placeholder($chunks->get('description'))
             ->value($chunks->get('active'))
             ->sendTrueOrFalse()
-            ->indeterminate($this->getIndeterminateStatus(
-                $chunks->get('slug'),
-                $chunks->get('active')
-            ));
+            ->indeterminate(
+                $this->getIndeterminateStatus(
+                    $chunks->get('slug'),
+                    $chunks->get('active')
+                )
+            );
     }
 
     /**

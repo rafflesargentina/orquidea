@@ -97,25 +97,29 @@ class RoleEditScreen extends Screen
      */
     public function save(Role $role, Request $request)
     {
-        $request->validate([
+        $request->validate(
+            [
             'role.slug' => [
                 'required',
                 Rule::unique(Role::class, 'slug')->ignore($role),
             ],
-        ]);
+            ]
+        );
 
         $role->fill($request->get('role'));
 
         $role->permissions = collect($request->get('permissions'))
-            ->map(function ($value, $key) {
-                return [base64_decode($key) => $value];
-            })
+            ->map(
+                function ($value, $key) {
+                    return [base64_decode($key) => $value];
+                }
+            )
             ->collapse()
             ->toArray();
 
         $role->save();
 
-        Toast::info(__('Role was saved'));
+        Toast::info(__('orchid.entity-saved', ['entity' => __('Role')]));
 
         return redirect()->route('platform.systems.roles');
     }
@@ -131,7 +135,7 @@ class RoleEditScreen extends Screen
     {
         $role->delete();
 
-        Toast::info(__('Role was removed'));
+        Toast::info(__('orchid.entity-removed', ['entity' => __('Role')]));
 
         return redirect()->route('platform.systems.roles');
     }

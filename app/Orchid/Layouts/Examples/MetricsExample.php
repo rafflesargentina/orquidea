@@ -11,7 +11,7 @@ class MetricsExample extends Metric
     /**
      * @var string
      */
-    protected $title = 'Metric Today';
+    protected $title = 'Metric today';
 
     /**
      * @var string

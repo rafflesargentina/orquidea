@@ -20,7 +20,7 @@ class UserListScreen extends Screen
      *
      * @var string
      */
-    public $name = 'User';
+    public $name = 'Users';
 
     /**
      * Display header description.
@@ -96,15 +96,17 @@ class UserListScreen extends Screen
      */
     public function saveUser(User $user, Request $request)
     {
-        $request->validate([
+        $request->validate(
+            [
             'user.email' => 'required|unique:users,email,'.$user->id,
-        ]);
+            ]
+        );
 
         $user->fill($request->input('user'))
             ->replaceRoles($request->input('user.roles'))
             ->save();
 
-        Toast::info(__('User was saved.'));
+        Toast::info(__('orchid.entity-saved', ['entity' => __('User')], __('User was saved.')));
     }
 
     /**

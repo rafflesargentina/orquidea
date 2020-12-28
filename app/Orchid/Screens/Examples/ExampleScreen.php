@@ -50,22 +50,22 @@ class ExampleScreen extends Screen
         return [
             'charts'  => [
                 [
-                    'name'   => 'Some Data',
+                    'name'   => __('Some Data'),
                     'values' => [25, 40, 30, 35, 8, 52, 17],
                     'labels' => ['12am-3am', '3am-6am', '6am-9am', '9am-12pm', '12pm-3pm', '3pm-6pm', '6pm-9pm'],
                 ],
                 [
-                    'name'   => 'Another Set',
+                    'name'   => __('Another Set'),
                     'values' => [25, 50, -10, 15, 18, 32, 27],
                     'labels' => ['12am-3am', '3am-6am', '6am-9am', '9am-12pm', '12pm-3pm', '3pm-6pm', '6pm-9pm'],
                 ],
                 [
-                    'name'   => 'Yet Another',
+                    'name'   => __('Yet Another'),
                     'values' => [15, 20, -3, -15, 58, 12, -17],
                     'labels' => ['12am-3am', '3am-6am', '6am-9am', '9am-12pm', '12pm-3pm', '3pm-6pm', '6pm-9pm'],
                 ],
                 [
-                    'name'   => 'And Last',
+                    'name'   => __('And last'),
                     'values' => [10, 33, -8, -3, 70, 20, -34],
                     'labels' => ['12am-3am', '3am-6am', '6am-9am', '9am-12pm', '12pm-3pm', '3pm-6pm', '6pm-9pm'],
                 ],
@@ -97,32 +97,34 @@ class ExampleScreen extends Screen
     {
         return [
 
-            Button::make('Show toast')
+            Button::make(__('Show toast'))
                 ->method('showToast')
                 ->novalidate()
                 ->icon('bag'),
 
-            ModalToggle::make('Launch demo modal')
+            ModalToggle::make(__('Launch demo modal'))
                 ->modal('exampleModal')
                 ->method('showToast')
                 ->icon('full-screen'),
 
-            DropDown::make('Dropdown button')
+            DropDown::make(__('Dropdown button'))
                 ->icon('folder-alt')
-                ->list([
+                ->list(
+                    [
 
-                    Button::make('Action')
+                    Button::make(__('Action'))
                         ->method('showToast')
                         ->icon('bag'),
 
-                    Button::make('Another action')
+                    Button::make(__('Another action'))
                         ->method('showToast')
                         ->icon('bubbles'),
 
-                    Button::make('Something else here')
+                    Button::make(__('Something else here'))
                         ->method('showToast')
                         ->icon('bulb'),
-                ]),
+                    ]
+                ),
 
         ];
     }
@@ -138,38 +140,50 @@ class ExampleScreen extends Screen
             MetricsExample::class,
             ChartBarExample::class,
 
-            Layout::table('table', [
+            Layout::table(
+                'table', [
                 TD::make('id', 'ID')
                     ->width('150')
-                    ->render(function (Repository $model) {
-                        // Please use view('path')
-                        return "<img src='https://picsum.photos/450/200?random={$model->get('id')}'
+                    ->render(
+                        function (Repository $model) {
+                            // Please use view('path')
+                            return "<img src='https://picsum.photos/450/200?random={$model->get('id')}'
                               alt='sample'
                               class='mw-100 d-block img-fluid'>
                             <span class='small text-muted mt-1 mb-0'># {$model->get('id')}</span>";
-                    }),
+                        }
+                    ),
 
-                TD::make('name', 'Name')
+                TD::make('name', __('Name'))
                     ->width('450')
-                    ->render(function (Repository $model) {
-                        return Str::limit($model->get('name'), 200);
-                    }),
+                    ->render(
+                        function (Repository $model) {
+                            return Str::limit($model->get('name'), 200);
+                        }
+                    ),
 
-                TD::make('price', 'Price')
-                    ->render(function (Repository $model) {
-                        return '$ '.number_format($model->get('price'), 2);
-                    }),
+                TD::make('price', __('Price'))
+                    ->render(
+                        function (Repository $model) {
+                            return '$ '.number_format($model->get('price'), 2);
+                        }
+                    ),
 
-                TD::make('created_at', 'Created'),
-            ]),
+                TD::make('created_at', __('Created')),
+                ]
+            ),
 
-            Layout::modal('exampleModal', Layout::rows([
-                Input::make('toast')
-                    ->title('Messages to display')
-                    ->placeholder('Hello world!')
-                    ->help('The entered text will be displayed on the right side as a toast.')
-                    ->required(),
-            ]))->title('Create your own toast message'),
+            Layout::modal(
+                'exampleModal', Layout::rows(
+                    [
+                    Input::make('toast')
+                        ->title(__('Message to display'))
+                        ->placeholder(__('Hello, world!'))
+                        ->help(__('The entered text will be displayed on the right side as a toast.'))
+                        ->required(),
+                    ]
+                )
+            )->title(__('Create your own toast message')),
         ];
     }
 
@@ -178,6 +192,6 @@ class ExampleScreen extends Screen
      */
     public function showToast(Request $request)
     {
-        Toast::warning($request->get('toast', 'Hello, world! This is a toast message.'));
+        Toast::warning($request->get('toast', __('Hello, world! This is a toast message.')));
     }
 }

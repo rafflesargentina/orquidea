@@ -112,7 +112,7 @@ return [
     */
 
     'template' => [
-        'header' => null,
+        'header' => 'brand.header',
         'footer' => null,
     ],
 

@@ -32,7 +32,7 @@ class UserProfileScreen extends Screen
      *
      * @var string
      */
-    public $description = 'Basic information';
+    public $description = 'Basic Information';
 
     /**
      * @var User
@@ -46,9 +46,9 @@ class UserProfileScreen extends Screen
      *
      * @return array
      */
-    public function query(Request $request): array
+    public function query(): array
     {
-        $this->user = $request->user();
+        $this->user = request()->user();
 
         return [
             'user' => $this->user,
@@ -65,12 +65,14 @@ class UserProfileScreen extends Screen
         return [
             DropDown::make(__('Settings'))
                 ->icon('open')
-                ->list([
+                ->list(
+                    [
                     ModalToggle::make(__('Change Password'))
                         ->icon('lock-open')
                         ->method('changePassword')
                         ->modal('password'),
-                ]),
+                    ]
+                ),
 
             Button::make(__('Save'))
                 ->icon('check')
@@ -86,26 +88,31 @@ class UserProfileScreen extends Screen
         return [
             UserEditLayout::class,
 
-            Layout::modal('password', Layout::rows([
-                Password::make('old_password')
-                    ->placeholder(__('Enter the current password'))
-                    ->required()
-                    ->title(__('Old password'))
-                    ->help('This is your password set at the moment.'),
+            Layout::modal(
+                'password', Layout::rows(
+                    [
+                    Password::make('old_password')
+                        ->placeholder(__('Enter the current password'))
+                        ->required()
+                        ->title(__('Old password'))
+                        ->help('This is your password set at the momoent.'),
 
-                Password::make('password')
-                    ->placeholder(__('Enter the password to be set'))
-                    ->required()
-                    ->title(__('New password')),
+                    Password::make('password')
+                        ->placeholder(__('Enter the password to be set'))
+                        ->required()
+                        ->title(__('New Password')),
 
-                Password::make('password_confirmation')
-                    ->placeholder(__('Enter the password to be set'))
-                    ->required()
-                    ->title(__('Confirm new password'))
-                    ->help('A good password is at least 15 characters or at least 8 characters long, including a number and a lowercase letter.'),
-            ]))
-                ->title(__('Change Password'))
-                ->applyButton(__('Update password')),
+                    Password::make('password_confirmation')
+                        ->placeholder(__('Ingrese la nueva contraseña nuevamente')) //Enter the password to be set
+                        ->required()
+                        ->title(__('Confirme la nueva contraseña')) //Confirm new password
+                        ->help('Una buena contraseña tiene al menos entre 8 y 15 caracteres, incluidos un número y una letra minúscula.'),
+                    // A good password is at least 15 characters or at least 8 characters long, including a number and a lowercase letter.
+                    ]
+                )
+            )
+                ->title(__('Cambiar Contraseña')) //Change Password
+                ->applyButton(__('Actualizar contraseña')), //Update password
         ];
     }
 
@@ -114,19 +121,21 @@ class UserProfileScreen extends Screen
      */
     public function save(Request $request)
     {
-        $request->validate([
+        $request->validate(
+            [
             'user.name'  => 'required|string',
             'user.email' => [
                 'required',
                 Rule::unique(User::class, 'email')->ignore($request->user()),
             ],
-        ]);
+            ]
+        );
 
         $request->user()
             ->fill($request->get('user'))
             ->save();
 
-        Toast::info(__('Profile updated.'));
+        Toast::info(__('Profile updated'));
     }
 
     /**
@@ -134,14 +143,18 @@ class UserProfileScreen extends Screen
      */
     public function changePassword(Request $request)
     {
-        $request->validate([
+        $request->validate(
+            [
             'old_password' => 'required|password:web',
             'password'     => 'required|confirmed',
-        ]);
+            ]
+        );
 
-        tap($request->user(), function ($user) use ($request) {
-            $user->password = Hash::make($request->get('password'));
-        })->save();
+        tap(
+            $request->user(), function ($user) use ($request) {
+                $user->password = Hash::make($request->get('password'));
+            }
+        )->save();
 
         Toast::info(__('Password changed.'));
     }

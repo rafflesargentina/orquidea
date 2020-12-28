@@ -3,8 +3,8 @@
 namespace App\Orchid\Screens\Examples;
 
 use Orchid\Screen\Action;
-use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Screen;
+use Orchid\Screen\Fields\Input;
 use Orchid\Support\Facades\Layout;
 
 class ExampleLayoutsScreen extends Screen
@@ -14,7 +14,7 @@ class ExampleLayoutsScreen extends Screen
      *
      * @var string
      */
-    public $name = 'Overview layouts';
+    public $name = 'Overviews layouts';
 
     /**
      * Display header description.
@@ -53,31 +53,39 @@ class ExampleLayoutsScreen extends Screen
     public function layout(): array
     {
         return [
-            Layout::tabs([
-                'Example Tab 1' => Layout::view('platform::dummy.block'),
-                'Example Tab 2' => Layout::view('platform::dummy.block'),
-                'Example Tab 3' => Layout::view('platform::dummy.block'),
-            ]),
+            Layout::tabs(
+                [
+                __('Example Tab ').'1' => Layout::view('platform::dummy.block'),
+                __('Example Tab ').'2' => Layout::view('platform::dummy.block'),
+                __('Example Tab ').'3' => Layout::view('platform::dummy.block'),
+                ]
+            ),
 
-            Layout::collapse([
-                Input::make('collapse-1')->title('First name'),
-                Input::make('collapse-2')->title('Last name'),
-                Input::make('collapse-3')->title('Username'),
-            ])->label('Click for me!'),
+            Layout::collapse(
+                [
+                Input::make('collapse-1')->title(_('First name')),
+                Input::make('collapse-2')->title(__('Last name')),
+                Input::make('collapse-3')->title(__('Username')),
+                ]
+            )->label(__('Click for me!')),
 
             Layout::view('platform::dummy.block'),
 
-            Layout::columns([
+            Layout::columns(
+                [
                 Layout::view('platform::dummy.block'),
                 Layout::view('platform::dummy.block'),
                 Layout::view('platform::dummy.block'),
-            ]),
+                ]
+            ),
 
-            Layout::accordion([
-                'Collapsible Group Item #1' => Layout::view('platform::dummy.block'),
-                'Collapsible Group Item #2' => Layout::view('platform::dummy.block'),
-                'Collapsible Group Item #3' => Layout::view('platform::dummy.block'),
-            ]),
+            Layout::accordion(
+                [
+                __('Collapsible Group Item').' #1' => Layout::view('platform::dummy.block'),
+                __('Collapsible Group Item').' #2' => Layout::view('platform::dummy.block'),
+                __('Collapsible Group Item').' #3' => Layout::view('platform::dummy.block'),
+                ]
+            ),
 
         ];
     }

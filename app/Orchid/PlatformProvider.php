@@ -26,55 +26,67 @@ class PlatformProvider extends OrchidServiceProvider
     public function registerMainMenu(): array
     {
         return [
-            ItemMenu::label('Example screen')
+            ItemMenu::label(__('Users'))
+                ->icon('user')
+                ->route('platform.systems.users')
+                ->title(__('Management'))
+                ->badge(
+                    function () {
+                        return null;
+                    }
+                ),
+
+            ItemMenu::label(__('Example screen'))
                 ->icon('monitor')
                 ->route('platform.example')
-                ->title('Navigation')
-                ->badge(function () {
-                    return 6;
-                }),
+                ->title(__('Navigation'))
+                ->badge(
+                    function () {
+                        return 6;
+                    }
+                ),
 
-            ItemMenu::label('Dropdown menu')
+            ItemMenu::label(__('Dropdown menu'))
                 ->slug('example-menu')
                 ->icon('code')
                 ->childs(),
 
-            ItemMenu::label('Sub element item 1')
+            ItemMenu::label(__('Sub element item').' 1')
                 ->place('example-menu')
                 ->icon('bag'),
 
-            ItemMenu::label('Sub element item 2')
+            ItemMenu::label(__('Sub element item').' 2')
                 ->place('example-menu')
                 ->icon('heart'),
 
-            ItemMenu::label('Basic Elements')
-                ->title('Form controls')
+            ItemMenu::label(__('Basic Elements'))
+                ->title(__('Form controls'))
                 ->icon('note')
                 ->route('platform.example.fields'),
 
-            ItemMenu::label('Advanced Elements')
+            ItemMenu::label(__('Advanced Elements'))
                 ->icon('briefcase')
                 ->route('platform.example.advanced'),
 
-            ItemMenu::label('Text Editors')
+            ItemMenu::label(__('Text Editors'))
                 ->icon('list')
                 ->route('platform.example.editors'),
 
-            ItemMenu::label('Overview layouts')
-                ->title('Layouts')
+            ItemMenu::label(__('Overviews layouts'))
+                ->title(__('Layouts'))
                 ->icon('layers')
                 ->route('platform.example.layouts'),
 
-            ItemMenu::label('Chart tools')
+            ItemMenu::label(__('Chart tools'))
                 ->icon('bar-chart')
                 ->route('platform.example.charts'),
 
-            ItemMenu::label('Cards')
+            ItemMenu::label(__('Cards'))
                 ->icon('grid')
                 ->route('platform.example.cards'),
 
-            ItemMenu::label('Documentation')
-                ->title('Docs')
+            ItemMenu::label(__('Documentation'))
+                ->title(__('Docs'))
                 ->icon('docs')
                 ->url('https://orchid.software/en/docs'),
         ];
@@ -86,7 +98,7 @@ class PlatformProvider extends OrchidServiceProvider
     public function registerProfileMenu(): array
     {
         return [
-            ItemMenu::label('Profile')
+            ItemMenu::label(__('Profile'))
                 ->route('platform.profile')
                 ->icon('user'),
         ];
@@ -119,7 +131,7 @@ class PlatformProvider extends OrchidServiceProvider
                 ->route('platform.systems.roles')
                 ->permission('platform.systems.roles')
                 ->sort(1000)
-                ->title(__('A Role defines a set of tasks a user assigned the role is allowed to perform.')),
+                ->title(__('A Role defines a set of tasks a user assigned the role is allowed to perform.'))
         ];
     }
 

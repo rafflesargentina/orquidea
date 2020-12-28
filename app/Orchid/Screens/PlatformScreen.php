@@ -22,7 +22,7 @@ class PlatformScreen extends Screen
      *
      * @var string
      */
-    public $description = 'Welcome to your Orchid application.';
+    public $description = 'Welcome to your Orchid application';
 
     /**
      * Query data.
@@ -42,15 +42,15 @@ class PlatformScreen extends Screen
     public function commandBar(): array
     {
         return [
-            Link::make('Website')
+            Link::make(__('Website'))
                 ->href('http://orchid.software')
                 ->icon('globe-alt'),
 
-            Link::make('Documentation')
+            Link::make(__('Documentation'))
                 ->href('https://orchid.software/en/docs')
                 ->icon('docs'),
 
-            Link::make('GitHub')
+            Link::make(__('GitHub'))
                 ->href('https://github.com/orchidsoftware/platform')
                 ->icon('social-github'),
         ];

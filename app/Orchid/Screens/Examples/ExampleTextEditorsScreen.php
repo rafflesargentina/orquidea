@@ -34,7 +34,7 @@ class ExampleTextEditorsScreen extends Screen
     public function query(): array
     {
         return [
-            'quill'     => 'Hello! We collected all the fields in one place',
+            'quill'     => __('Hello! We collected all the fields in one place'),
             'simplemde' => '# Big header',
             'code'      => Str::limit(file_get_contents(__FILE__), 500),
         ];
@@ -60,19 +60,20 @@ class ExampleTextEditorsScreen extends Screen
     public function layout(): array
     {
         return [
-            Layout::rows([
+            Layout::rows(
+                [
                 SimpleMDE::make('simplemde')
                     ->title('SimpleMDE')
-                    ->popover('SimpleMDE is a simple, embeddable, and beautiful JS markdown editor'),
-
+                    ->popover(__('SimpleMDE is a simple, embeddable, and beautiful JS markdown editor')),
                 Quill::make('quill')
                     ->title('Quill')
-                    ->popover('Quill is a free, open source WYSIWYG editor built for the modern web.'),
+                    ->popover(__('Quill is a free, open source WYSIWYG editor built for the modern web.')),
 
                 Code::make('code')
-                    ->title('Name Articles'),
+                    ->title(__('Name Articles')),
 
-            ]),
+                ]
+            ),
         ];
     }
 }

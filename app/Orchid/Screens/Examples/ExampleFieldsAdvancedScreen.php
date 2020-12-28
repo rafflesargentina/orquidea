@@ -46,7 +46,7 @@ class ExampleFieldsAdvancedScreen extends Screen
     public function query(): array
     {
         return [
-            'name'  => 'Hello! We collected all the fields in one place',
+            'name'  => __('Hello! We collected all the fields in one place'),
             'place' => [
                 'lat' => 37.181244855427394,
                 'lng' => -3.6021993309259415,
@@ -75,167 +75,205 @@ class ExampleFieldsAdvancedScreen extends Screen
     {
         return [
 
-            Layout::rows([
+            Layout::rows(
+                [
 
-                Group::make([
+                Group::make(
+                    [
                     Input::make('phone')
                         ->mask('(999) 999-9999')
-                        ->title('Phone')
-                        ->placeholder('Enter phone number')
-                        ->help('Number Phone'),
+                        ->title(__('Phone'))
+                        ->placeholder(__('Enter phone number'))
+                        ->help(__('Phone number')),
 
                     Input::make('ip_address')
-                        ->title('IP address:')
-                        ->placeholder('Enter address')
-                        ->help('Specifies an address in IPv4 format')
-                        ->mask([
+                        ->title(__('IP address:'))
+                        ->placeholder(__('Enter address'))
+                        ->help(__('Specifies an address in IPv4 format'))
+                        ->mask(
+                            [
                             'alias' => 'ip',
-                        ]),
+                            ]
+                        ),
 
                     Input::make('license_plate')
-                        ->title('License plate:')
-                        ->mask([
+                        ->title(__('License plate:'))
+                        ->mask(
+                            [
                             'mask' => '[9-]AAA-999',
-                        ]),
-                ]),
+                            ]
+                        ),
+                    ]
+                ),
 
-                Group::make([
+                Group::make(
+                    [
 
                     Input::make('credit_card')
                         ->mask('9999-9999-9999-9999')
-                        ->title('Credit card:')
-                        ->placeholder('Credit card number')
-                        ->help('Number is the long set of digits displayed across the front your plastic card'),
+                        ->title(__('Credit card:'))
+                        ->placeholder(__('Credit card number'))
+                        ->help(__('Number is the long set of digits displayed across the front your plastic card')),
 
                     Input::make('currency')
-                        ->title('Currency dollar:')
-                        ->mask([
+                        ->title(__('Currency dollar:'))
+                        ->mask(
+                            [
                             'alias' => 'currency',
-                        ])->help('Some aliases found in the extensions are: email, currency, decimal, integer, date, datetime, dd/mm/yyyy, etc.'),
+                            ]
+                        )->help(__('Some aliases found in the extensions are: email, currency, decimal, integer, date, datetime, dd/mm/yyyy, etc.')),
 
                     Input::make('currency')
-                        ->title('Currency euro:')
-                        ->mask([
+                        ->title(__('Currency euro:'))
+                        ->mask(
+                            [
                             'mask'         => '€ 999.999.999,99',
                             'numericInput' => true,
-                        ]),
-                ]),
+                            ]
+                        ),
+                    ]
+                ),
 
-            ])->title('Input mask'),
+                ]
+            )->title(__('Input mask')),
 
-            Layout::rows([
+            Layout::rows(
+                [
 
-                Group::make([
+                Group::make(
+                    [
                     DateTimer::make('open')
-                        ->title('Opening date')
-                        ->help('The opening event will take place'),
+                        ->title(__('Opening date'))
+                        ->help(__('The opening event will take place')),
 
                     DateTimer::make('allowInput')
-                        ->title('Allow input')
+                        ->title(__('Allow input'))
                         ->required()
                         ->allowInput(),
 
                     DateTimer::make('enabledTime')
-                        ->title('Enabled time')
+                        ->title(__('Enabled time'))
                         ->enableTime(),
-                ]),
+                    ]
+                ),
 
-                Group::make([
+                Group::make(
+                    [
                     DateTimer::make('format24hr')
-                        ->title('Format 24hr')
+                        ->title(__('Format 24hr'))
                         ->enableTime()
                         ->format24hr(),
 
                     DateTimer::make('custom')
-                        ->title('Custom format')
+                        ->title(__('Custom format'))
                         ->noCalendar()
                         ->format('h:i K'),
 
                     DateRange::make('rangeDate')
-                        ->title('Range date'),
-                ]),
+                        ->title(__('Range date')),
+                    ]
+                ),
 
-            ])->title('DateTime'),
+                ]
+            )->title(__('DateTime')),
 
-            Layout::columns([
-                Layout::rows([
+            Layout::columns(
+                [
+                Layout::rows(
+                    [
                     Select::make('robot.')
-                        ->options([
+                        ->options(
+                            [
                             'index'   => 'Index',
                             'noindex' => 'No index',
-                        ])
+                            ]
+                        )
                         ->multiple()
-                        ->title('Multiple select')
-                        ->help('Allow search bots to index'),
+                        ->title(__('Multiple select'))
+                        ->help(__('Allow search bots to index')),
 
                     Relation::make('user')
                         ->fromModel(User::class, 'name')
-                        ->title('Select for Eloquent model'),
-                ])->title('Select'),
-                Layout::rows([
+                        ->title(__('Select for Eloquent model')),
+                    ]
+                )->title(__('Select')),
+                Layout::rows(
+                    [
 
-                    Group::make([
+                    Group::make(
+                        [
                         CheckBox::make('free-checkbox')
                             ->sendTrueOrFalse()
-                            ->title('Free checkbox')
-                            ->placeholder('Event for free')
-                            ->help('Event for free'),
+                            ->title(__('Free checkbox'))
+                            ->placeholder(__('Event for free'))
+                            ->help(__('Event for free')),
 
                         Switcher::make('free-switch')
                             ->sendTrueOrFalse()
-                            ->title('Free switch')
-                            ->placeholder('Event for free')
-                            ->help('Event for free'),
-                    ]),
+                            ->title(__('Free switch'))
+                            ->placeholder(__('Event for free'))
+                            ->help(__('Event for free')),
+                        ]
+                    ),
 
                     RadioButtons::make('radioButtons')
-                        ->options([
-                            1 => 'Enabled',
-                            0 => 'Disabled',
-                            3 => 'Pause',
-                            4 => 'Work',
-                        ])
-                        ->help('Radio buttons are normally presented in radio groups'),
+                        ->options(
+                            [
+                            1 => __('Enabled'),
+                            0 => __('Disabled'),
+                            3 => __('Pause'),
+                            4 => __('Work'),
+                            ]
+                        )
+                        ->help(__('Radio buttons are normally presented in radio groups')),
 
-                ])->title('Status'),
-            ]),
+                    ]
+                )->title(__('Status')),
+                ]
+            ),
 
-            Layout::rows([
+            Layout::rows(
+                [
 
                 Picture::make('picture')
-                    ->title('Picture')
+                    ->title(__('Picture'))
                     ->horizontal(),
 
                 Cropper::make('cropper')
-                    ->title('Cropper')
+                    ->title(__('Cropper'))
                     ->width(500)
                     ->height(300)
                     ->horizontal(),
 
                 Upload::make('files')
-                    ->title('Upload files')
+                    ->title(__('Upload files'))
                     ->horizontal(),
 
-            ])->title('File upload'),
+                ]
+            )->title('File upload'),
 
-            Layout::rows([
+            Layout::rows(
+                [
 
                 UTM::make('link')
-                    ->title('UTM link')
-                    ->help('Generated UTM link'),
+                    ->title(__('UTM link'))
+                    ->help(__('Generated UTM link')),
 
                 Matrix::make('matrix')
-                    ->columns([
-                        'Attribute',
-                        'Value',
-                        'Units',
-                    ]),
+                    ->columns(
+                        [
+                        __('Attribute'),
+                        __('Value'),
+                        __('Units'),
+                        ]
+                    ),
 
                 Map::make('place')
-                    ->title('Object on the map')
-                    ->help('Enter the coordinates, or use the search'),
+                    ->title(__('Object on the map'))
+                    ->help(__('Enter the coordinates, or use the search')),
 
-            ])->title('Advanced'),
+                ]
+            )->title(__('Advanced')),
         ];
     }
 }

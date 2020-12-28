@@ -30,51 +30,65 @@ class UserListLayout extends Table
                 ->sort()
                 ->cantHide()
                 ->filter(TD::FILTER_TEXT)
-                ->render(function (User $user) {
-                    return new Persona($user->presenter());
-                }),
+                ->render(
+                    function (User $user) {
+                        return new Persona($user->presenter());
+                    }
+                ),
 
             TD::make('email', __('Email'))
                 ->sort()
                 ->cantHide()
                 ->filter(TD::FILTER_TEXT)
-                ->render(function (User $user) {
-                    return ModalToggle::make($user->email)
+                ->render(
+                    function (User $user) {
+                        return ModalToggle::make($user->email)
                         ->modal('oneAsyncModal')
                         ->modalTitle($user->presenter()->title())
                         ->method('saveUser')
-                        ->asyncParameters([
+                        ->asyncParameters(
+                            [
                             'user' => $user->id,
-                        ]);
-                }),
+                            ]
+                        );
+                    }
+                ),
 
-            TD::make('updated_at', __('Last edit'))
+            TD::make('updated_at', __('Last Edit'))
                 ->sort()
-                ->render(function (User $user) {
-                    return $user->updated_at->toDateTimeString();
-                }),
+                ->render(
+                    function (User $user) {
+                        return $user->updated_at->toDateTimeString();
+                    }
+                ),
 
             TD::make(__('Actions'))
                 ->align(TD::ALIGN_CENTER)
                 ->width('100px')
-                ->render(function (User $user) {
-                    return DropDown::make()
-                        ->icon('options-vertical')
-                        ->list([
+                ->render(
+                    function (User $user) {
+                        return DropDown::make()
+                            ->icon('options-vertical')
+                            ->list(
+                                [
 
-                            Link::make(__('Edit'))
-                                ->route('platform.systems.users.edit', $user->id)
-                                ->icon('pencil'),
+                                Link::make(__('Edit'))
+                                    ->route('platform.systems.users.edit', $user->id)
+                                    ->icon('pencil'),
 
-                            Button::make(__('Delete'))
-                                ->method('remove')
-                                ->confirm(__('Are you sure you want to delete the user?'))
-                                ->parameters([
-                                    'id' => $user->id,
-                                ])
-                                ->icon('trash'),
-                        ]);
-                }),
+                                Button::make(__('Delete'))
+                                    ->method('remove')
+                                    ->confirm(__('orchid.entity-remove-confirmation', ['entity' => __('User')]))
+                                    ->parameters(
+                                        [
+                                        'id' => $user->id,
+                                        ]
+                                    )
+                                    ->icon('trash'),
+                                ]
+                            );
+                    }
+                ),
         ];
     }
 }

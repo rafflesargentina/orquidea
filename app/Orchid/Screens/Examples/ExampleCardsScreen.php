@@ -38,7 +38,7 @@ class ExampleCardsScreen extends Screen
                  */
                 public function title(): string
                 {
-                    return 'Title of a longer featured blog post';
+                    return __('Title of a longer featured blog post');
                 }
 
                 /**
@@ -46,11 +46,9 @@ class ExampleCardsScreen extends Screen
                  */
                 public function description(): string
                 {
-                    return 'This is a wider card with supporting text below as a natural lead-in to additional content.
-                            This content is a little bit longer. This is a wider card with supporting text below as
-                            a natural lead-in to additional content. This content is a little bit longer.
-                            This is a wider card with supporting text below as a natural lead-in to additional content.
-                            This content is a little bit longer.';
+                    return __('This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer. ')
+                          .__('This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer. ')
+                          .__('This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer. ');
                 }
 
                 /**
@@ -91,13 +89,15 @@ class ExampleCardsScreen extends Screen
                  */
                 public function description(): string
                 {
-                    return new Compendium([
-                        'Type'                               => 'electric stove',
-                        'Model'                              => 'dream 251CH',
-                        'Main color'                         => 'white',
-                        'Complementary color'                => 'none',
-                        'Color declared by the manufacturer' => 'white',
-                    ]);
+                    return new Compendium(
+                        [
+                        __('Type')                                => 'electric stove',
+                        __('Model')                               => 'dream 251CH',
+                        __('Main color')                          => __('white'),
+                        __('Complementary color')                 => __('none'),
+                        __('Color declared by the manufacturer')  => __('white'),
+                        ]
+                    );
                 }
 
                 /**
@@ -130,7 +130,7 @@ class ExampleCardsScreen extends Screen
                  */
                 public function title(): string
                 {
-                    return 'Prepare for presentation';
+                    return __('Prepare for presentation');
                 }
 
                 /**
@@ -139,8 +139,8 @@ class ExampleCardsScreen extends Screen
                 public function description(): string
                 {
                     return
-                        '<p>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>'.
-                        new Facepile(User::limit(4)->get()->map->presenter());
+                        '<p>'.__('This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer. ').'</p>'.
+                    new Facepile(User::limit(4)->get()->map->presenter());
                 }
 
                 /**
@@ -190,27 +190,33 @@ class ExampleCardsScreen extends Screen
     public function layout(): array
     {
         return [
-            new Card('card', [
-                Button::make('Example Button')
+            new Card(
+                'card', [
+                Button::make(__('Example button'))
                     ->method('showToast')
                     ->icon('bag'),
-                Button::make('Example Button')
+                Button::make(__('Example button'))
                     ->method('showToast')
                     ->icon('bag'),
-            ]),
+                ]
+            ),
 
-            Layout::columns([
+            Layout::columns(
+                [
                 new Card('cardPersona'),
-                new Card('cardPersona', [
-                    Button::make('Example Button')
+                new Card(
+                    'cardPersona', [
+                    Button::make(__('Example button'))
                         ->method('showToast')
                         ->icon('bag'),
 
-                    Button::make('Example Button')
+                    Button::make(__('Example button'))
                         ->method('showToast')
                         ->icon('bag'),
-                ]),
-            ]),
+                    ]
+                ),
+                ]
+            ),
 
             new Card('cardCompendium'),
         ];
@@ -221,6 +227,6 @@ class ExampleCardsScreen extends Screen
      */
     public function showToast(Request $request)
     {
-        Toast::warning($request->get('toast', 'Hello, world! This is a toast message.'));
+        Toast::warning($request->get('toast', __('Hello, world! This is a toast message.')));
     }
 }

@@ -62,7 +62,7 @@ class UserEditScreen extends Screen
     public function commandBar(): array
     {
         return [
-            Button::make(__('Login as user'))
+            Button::make(__('Login as user '))
                 ->icon('login')
                 ->method('loginAs'),
 
@@ -72,7 +72,7 @@ class UserEditScreen extends Screen
 
             Button::make(__('Remove'))
                 ->icon('trash')
-                ->confirm('Are you sure you want to delete the user?')
+                ->confirm(__('orchid.entity-remove-confirmation', ['entity' => __('User')]))
                 ->method('remove'),
         ];
     }
@@ -97,29 +97,35 @@ class UserEditScreen extends Screen
      */
     public function save(User $user, Request $request)
     {
-        $request->validate([
+        $request->validate(
+            [
             'user.email' => [
                 'required',
                 Rule::unique(User::class, 'email')->ignore($user),
             ],
-        ]);
+            ]
+        );
 
         $permissions = collect($request->get('permissions'))
-            ->map(function ($value, $key) {
-                return [base64_decode($key) => $value];
-            })
+            ->map(
+                function ($value, $key) {
+                    return [base64_decode($key) => $value];
+                }
+            )
             ->collapse()
             ->toArray();
 
         $user
             ->fill($request->get('user'))
             ->replaceRoles($request->input('user.roles'))
-            ->fill([
+            ->fill(
+                [
                 'permissions' => $permissions,
-            ])
+                ]
+            )
             ->save();
 
-        Toast::info(__('User was saved.'));
+        Toast::info(__('orchid.entity-saved', ['entity' => __('User')]));
 
         return redirect()->route('platform.systems.users');
     }
@@ -135,7 +141,7 @@ class UserEditScreen extends Screen
     {
         $user->delete();
 
-        Toast::info(__('User was removed'));
+        Toast::info(__('orchid.entity-removed', ['entity' => __('User')]));
 
         return redirect()->route('platform.systems.users');
     }

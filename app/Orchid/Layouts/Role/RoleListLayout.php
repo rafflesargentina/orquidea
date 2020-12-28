@@ -22,14 +22,16 @@ class RoleListLayout extends Table
     public function columns(): array
     {
         return [
-            TD::make('name', __('Name'))
+            TD::make('name', __('Nombre'))
                 ->sort()
                 ->cantHide()
                 ->filter(TD::FILTER_TEXT)
-                ->render(function (Role $role) {
-                    return Link::make($role->name)
+                ->render(
+                    function (Role $role) {
+                        return Link::make($role->name)
                         ->route('platform.systems.roles.edit', $role->id);
-                }),
+                    }
+                ),
 
             TD::make('slug', __('Slug'))
                 ->sort()
@@ -38,9 +40,11 @@ class RoleListLayout extends Table
 
             TD::make('created_at', __('Created'))
                 ->sort()
-                ->render(function (Role $role) {
-                    return $role->created_at->toDateTimeString();
-                }),
+                ->render(
+                    function (Role $role) {
+                        return $role->created_at->toDateTimeString();
+                    }
+                ),
         ];
     }
 }
