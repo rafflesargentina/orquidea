@@ -24,7 +24,7 @@ class UserPresenter extends Presenter implements Searchable, Personable
      */
     public function title(): string
     {
-        return $this->entity->name;
+        return $this->entity->name ?: '';
     }
 
     /**
